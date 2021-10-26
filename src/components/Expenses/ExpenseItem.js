@@ -9,7 +9,7 @@ const ExpenseItem = (props) => {     //Un Conmpnent est sous forme de fonction
 const [title, setTitle] = useState(props.title);                      // appelle de la fonction useState imperativement dans la fonction du component
 //retourne un array, first value retoune lui meme, second value return uptdating function 
 // title = props.title and setTitle = function new value. j'ai choisi le nom.
-console.log("expensesItem nb comportment")
+console.log(title)
 
 const clickHandler = ()=>{
     setTitle ("Updated");     // Calling function and passed new value as argument
@@ -17,16 +17,18 @@ const clickHandler = ()=>{
 
     return(
         // Syntaxe JSX
+        <li>
         <Card className = "expense-item">
             <ExpenseDate date = {props.date}/>
             {/* PROPS.object key */}
             <div className = "expense-item__description">
                 {/* title = const title, setTitle */}
-                <h2>{title}</h2>  
+               <h2>{props.title}</h2>  
                 <div className = "expense-item__price">${props.amount}</div>
             </div>
             <button onClick={clickHandler}>Change title</button>
         </Card>
+        </li>
     )
 }
 

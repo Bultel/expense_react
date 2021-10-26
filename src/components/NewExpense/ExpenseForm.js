@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import "./ExpenseForm.css";
 
-const ExpenseForm = () =>{
+const ExpenseForm = (props) =>{
 
     const [enteredTitle, setEnteredTitle] = useState("");            // useState title
     const titleChangeHandler = (event)=>{                              //function gather user input
@@ -25,8 +25,12 @@ const ExpenseForm = () =>{
             amount: enteredAmount,                 // const qui contient un objet qui regroupe nos event
             date: new Date(enteredDate),
         };
-        console.log (expenseData);
-    }
+        
+        props.onSaveExpenseData(expenseData);
+        setEnteredTitle ("");
+        setEnteredDate ("");
+        setEnteredAmount("");                      // reinitialise les gather user input for clean form after submit
+    };
 
     return (
      
@@ -34,15 +38,15 @@ const ExpenseForm = () =>{
            <div className = "new-expense__controls">
                 <div className = "new-expense__control">
                     <label>Title</label>
-                    <input type = "text" onChange = {titleChangeHandler}/>
+                    <input type = "text" value={enteredTitle} onChange = {titleChangeHandler}/>
                 </div>
                 <div className = "new-expense__control">
                     <label>Amount</label>
-                    <input type = "number" min = "0.01" step = "0.01" onChange = {amountChangeHandler}/>
+                    <input type = "number" value={enteredAmount} min = "0.01" step = "0.01" onChange = {amountChangeHandler}/>
                 </div>
                 <div className = "new-expense__control">
                     <label>Date</label>
-                    <input type = "date" min = "2019-01-01" step = "2022-31-12" onChange = {dateChangeHandler}/>
+                    <input type = "date" value={enteredDate} min = "2019-01-01" step = "2022-31-12" onChange = {dateChangeHandler}/>
                 </div>
            </div>
            <div className="new-expense__actions">
